@@ -2,8 +2,6 @@
 
 import * as React from "react";
 
-import { Icons } from "@/components/icons";
-import { Button } from "@/components/ui/button";
 import { authClient } from "@/lib/auth-client";
 import type { OAuthStrategy } from "@/lib/auth-types";
 

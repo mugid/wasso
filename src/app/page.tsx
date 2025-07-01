@@ -1,8 +1,7 @@
-import Image from "next/image";
-import { SignIn } from "@/components/auth/sign-in";
+
 
 export default function Home() {
   return (
-  <SignIn />
+  <div className="flex items-center justify-center min-h-screen">Here you will see stunning starting page</div>
   );
 }

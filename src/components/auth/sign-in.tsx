@@ -1,15 +1,15 @@
-import { authClient } from "@/lib/auth-client"
+"use client";
+
+import { authClient } from "@/lib/auth-client";
+
+import { Button } from "@/components/ui/button"
 
 const signIn = async () => {
-    const data = await authClient.signIn.social({
-        provider: "google"
-    })
-}
+  const data = await authClient.signIn.social({
+    provider: "google",
+  });
+};
 
 export function SignIn() {
-    return (
-        <button className="bg-blue-500 text-white px-4 py-2 rounded">
-            Sign In
-        </button>
-    )
+  return <Button onClick={signIn}>Sign In</Button>;
 }

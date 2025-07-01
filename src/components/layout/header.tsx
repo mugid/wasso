@@ -1,4 +1,5 @@
 import { ModeToggle } from "../theme-toggle";
+import { SignIn } from "../auth/sign-in";
 
 export function Header() {
   return (
@@ -7,19 +8,20 @@ export function Header() {
         <h1>wasso</h1>
       </div>
       <nav>
-        <div className="space-x-4">
-          <a href="/" className="hover:underline">
-            Home
+        <div className="flex items-center space-x-4">
+          <a href="/create" className="hover:underline">
+            create
           </a>
           <a href="/about" className="hover:underline">
-            About
+            about
           </a>
           <a href="/contact" className="hover:underline">
-            Contact
+            contact
           </a>
         </div>
       </nav>
-      <div>
+      <div className="flex items-center space-x-4">
+        <SignIn />
         <ModeToggle />
       </div>
     </header>

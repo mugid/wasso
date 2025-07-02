@@ -1,7 +1,13 @@
+import { authClient } from "@/lib/auth-client";
+
 import { ModeToggle } from "../theme-toggle";
 import { SignIn } from "../auth/sign-in";
+import Link from "next/link";
+import { Button } from "@/components/ui/button";
 
-export function Header() {
+export async function Header() {
+  const { data: session } = await authClient.getSession();
+
   return (
     <header className="sticky flex items-center justify-between py-4 px-6">
       <div>
@@ -21,7 +27,13 @@ export function Header() {
         </div>
       </nav>
       <div className="flex items-center space-x-4">
-        <SignIn />
+        {session ? (
+          <SignIn />
+        ) : (
+          <Button>
+            <Link href="/profile">Profile</Link>
+          </Button>
+        )}
         <ModeToggle />
       </div>
     </header>

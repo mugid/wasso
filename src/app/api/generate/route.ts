@@ -1,5 +1,4 @@
 import { generateObject } from "ai";
-import { createOpenRouter } from "@openrouter/ai-sdk-provider";
 import { createAzure } from "@ai-sdk/azure";
 import { z } from "zod";
 

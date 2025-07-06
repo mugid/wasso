@@ -5,17 +5,17 @@ import { z } from "zod";
 
 export async function getGeneratedWords() {
   const azure = createAzure({
-    resourceName: "wasso",
+    resourceName: "beksl-mcqdprhs-eastus2",
     apiKey: process.env.NEXT_PUBLIC_AZURE_API_KEY,
   });
 
   const { object } = await generateObject({
-    model: azure('gpt-04-mini'),
+    model: azure('o4-mini'),
     schema: z.object({
       words: z.array(z.string()),
     }),
     prompt: "Generate a list of 10 random words",
   });
 
-  console.log("Generated words:", object.words);
+  return { object };
 }

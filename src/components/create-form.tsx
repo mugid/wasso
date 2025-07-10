@@ -24,10 +24,13 @@ const formSchema = z.object({
 });
 
 import { useState } from "react";
+import MindMap from "./mindmap";
+import { WordNode } from "./mindmap"; 
+
 
 export function CreateMindMapForm() {
-  const [result, setResult] = useState<object | null>(null);
-
+  const [result, setResult] = useState<WordNode>();
+  
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
@@ -38,7 +41,7 @@ export function CreateMindMapForm() {
   async function onSubmit(values: z.infer<typeof formSchema>) {
     try {
       const generated = await getGeneratedWords(values.word);
-      setResult(generated);
+      setResult(generated.object as WordNode);
       // handle result here (e.g., set state, show result, etc.)
       console.log(generated);
     } catch (error) {
@@ -69,7 +72,7 @@ export function CreateMindMapForm() {
           <Button type="submit">Submit</Button>
         </form>
       </Form>
-      <p>{result ? JSON.stringify(result) : "Nothing"}</p>
+      {result && <MindMap data={result} />}
     </>
   );
 }

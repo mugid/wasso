@@ -24,8 +24,8 @@ const formSchema = z.object({
 });
 
 import { useState } from "react";
-import MindMap from "./mindmop";
-import { WordNode } from "./mindmop"; 
+import MindMap from "./mindmap";
+import { WordNode } from "./mindmap"; 
 
 
 export function CreateMindMapForm() {

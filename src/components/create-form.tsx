@@ -2,20 +2,23 @@
 
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
+import { useState } from "react";
 import { z } from "zod";
 
 import { Button } from "@/components/ui/button";
 import {
   Form,
   FormControl,
-  FormDescription,
   FormField,
   FormItem,
-  FormLabel,
   FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { getGeneratedWords } from "@/app/api/generate/route";
+
+import MindMap from "./mindmap";
+import { WordNode } from "@/lib/mindmap-store"; 
+
 
 const formSchema = z.object({
   word: z.string().min(1, {
@@ -23,9 +26,36 @@ const formSchema = z.object({
   }),
 });
 
-import { useState } from "react";
-import MindMap from "./mindmap";
-import { WordNode } from "./mindmap"; 
+const sampleData: WordNode = {
+  word: "Project Planning",
+  children: [
+    {
+      word: "Research",
+      children: [
+        { word: "Market Analysis", children: [] },
+        { word: "User Interviews", children: [] },
+        { word: "Competitor Study", children: [] },
+      ],
+    },
+    {
+      word: "Design",
+      children: [
+        { word: "Wireframes", children: [] },
+        { word: "Prototypes", children: [] },
+        { word: "User Testing", children: [] },
+      ],
+    },
+    {
+      word: "Development",
+      children: [
+        { word: "Frontend", children: [] },
+        { word: "Backend", children: [] },
+        { word: "Database", children: [] },
+      ],
+    },
+  ],
+}
+
 
 
 export function CreateMindMapForm() {
@@ -50,21 +80,17 @@ export function CreateMindMapForm() {
   }
 
   return (
-    <>
+    <div>
       <Form {...form}>
-        <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
+        <form onSubmit={form.handleSubmit(onSubmit)} className="fixed z-2 flex items-center justify-center w-full">
           <FormField
             control={form.control}
             name="word"
             render={({ field }) => (
               <FormItem>
-                <FormLabel>word</FormLabel>
                 <FormControl>
                   <Input placeholder="enter the word" {...field} />
                 </FormControl>
-                <FormDescription>
-                  This is the word you want to generate a mind map for.
-                </FormDescription>
                 <FormMessage />
               </FormItem>
             )}
@@ -73,6 +99,6 @@ export function CreateMindMapForm() {
         </form>
       </Form>
       {result && <MindMap data={result} />}
-    </>
+    </div>
   );
 }

@@ -2,21 +2,11 @@ import { generateObject } from "ai";
 import { createAzure } from "@ai-sdk/azure";
 import { z } from "zod";
 
-interface WordNodeType {
-  word: string;
-  children: WordNodeType[];
-}
 
 export async function getGeneratedWords(userInput: string) {
-  const WordNode: z.ZodType<WordNodeType> = z.lazy(() =>
-    z.object({
-      word: z.string(),
-      children: z.array(WordNode),
-    })
-  );
 
-  const schema = WordNode;
-
+  
+  
   const azure = createAzure({
     resourceName: "beksl-mcqdprhs-eastus2",
     apiKey: process.env.NEXT_PUBLIC_AZURE_API_KEY,

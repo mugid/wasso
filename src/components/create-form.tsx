@@ -17,7 +17,7 @@ import { Input } from "@/components/ui/input";
 import { getGeneratedWords } from "@/app/api/generate/route";
 
 import MindMap from "./mindmap";
-import { WordNode } from "@/lib/mindmap-store"; 
+import { WordNode } from "@/types"; 
 
 
 const formSchema = z.object({

@@ -1,7 +1,8 @@
 "use client"
 
 import { useEffect, useRef, useCallback } from "react"
-import { useMindmapStore, layoutTree, type WordNode } from "@/lib/mindmap-store"
+import { useMindmapStore, layoutTree } from "@/lib/mindmap-store"
+import { WordNode } from "@/types"
 
 export default function MindMap({ data }: { data: WordNode }) {
   const {

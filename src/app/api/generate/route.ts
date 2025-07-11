@@ -5,8 +5,6 @@ import { z } from "zod";
 
 export async function getGeneratedWords(userInput: string) {
 
-  
-  
   const azure = createAzure({
     resourceName: "beksl-mcqdprhs-eastus2",
     apiKey: process.env.NEXT_PUBLIC_AZURE_API_KEY,

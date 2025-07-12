@@ -26,7 +26,7 @@ export default function MindMap({ data }: { data: WordNode }) {
   const containerRef = useRef<HTMLDivElement>(null)
   const dragStartRef = useRef({ x: 0, y: 0 })
 
-  // Initialize layout when data changes
+
   useEffect(() => {
     if (!containerRef.current) return
 
@@ -60,7 +60,6 @@ export default function MindMap({ data }: { data: WordNode }) {
         const nodeW = rect.width / scale
         const nodeH = rect.height / scale
 
-        // Check if click is within node bounds (accounting for centered positioning)
         return x >= node.x - nodeW / 2 && x <= node.x + nodeW / 2 && y >= node.y - nodeH / 2 && y <= node.y + nodeH / 2
       })
     },
@@ -131,7 +130,7 @@ export default function MindMap({ data }: { data: WordNode }) {
   }, [handleMouseDown, handleMouseMove, handleMouseUp, handleWheel])
 
   return (
-    <div className="w-full h-[90vh] overflow-hidden bg-white">
+    <div className="w-full h-screen overflow-hidden">
       <div ref={containerRef} className="absolute inset-0 cursor-grab active:cursor-grabbing">
         <div
           style={{
@@ -141,7 +140,7 @@ export default function MindMap({ data }: { data: WordNode }) {
             height: "100%",
           }}
         >
-          {/* SVG for lines */}
+
           <svg className="absolute top-0 left-0 w-full h-full pointer-events-none z-0" style={{ overflow: "visible" }}>
             {lines.map((line) => (
               <line
@@ -150,14 +149,13 @@ export default function MindMap({ data }: { data: WordNode }) {
                 y1={line.from.y}
                 x2={line.to.x}
                 y2={line.to.y}
-                stroke="#666"
+                stroke="#FFFFFF"
                 strokeWidth={2}
                 opacity={0.8}
               />
             ))}
           </svg>
 
-          {/* Nodes */}
           {nodes.map((node) => (
             <div
               key={node.id}
@@ -165,11 +163,11 @@ export default function MindMap({ data }: { data: WordNode }) {
                 nodeRefs.current[node.id] = el
               }}
               className={`
-                absolute z-10 px-3 py-2 bg-white border-2 border-gray-300 rounded-lg shadow-sm
-                font-medium text-center cursor-move hover:shadow-md transition-shadow duration-200
-                select-none text-gray-800
-                ${node.level === 0 ? "text-lg font-bold border-gray-500" : "text-sm"}
-                ${isDragging && dragNode === node.id ? "shadow-lg" : ""}
+                absolute z-10 rounded-lg
+                text-center cursor-move  
+                
+                ${node.level === 0 ? "text-lg" : "text-sm"}
+                ${isDragging && dragNode === node.id ? "" : ""}
               `}
               style={{
                 left: node.x,
@@ -184,39 +182,28 @@ export default function MindMap({ data }: { data: WordNode }) {
         </div>
       </div>
 
-      {/* Simple Controls */}
-      <div className="absolute top-4 left-4 flex flex-col gap-2 p-3 bg-white rounded-lg shadow-md z-20 border border-gray-200">
+      <div className="absolute top-4 left-4 flex flex-col z-20">
         <button
           onClick={() => setScale(Math.min(3, scale * 1.2))}
-          className="px-3 py-1 bg-gray-100 hover:bg-gray-200 text-gray-700 rounded text-sm font-medium transition-colors"
+          className=""
         >
           Zoom In
         </button>
         <button
           onClick={() => setScale(Math.max(0.3, scale / 1.2))}
-          className="px-3 py-1 bg-gray-100 hover:bg-gray-200 text-gray-700 rounded text-sm font-medium transition-colors"
+          className=""
         >
           Zoom Out
         </button>
         <button
           onClick={reset}
-          className="px-3 py-1 bg-gray-100 hover:bg-gray-200 text-gray-700 rounded text-sm font-medium transition-colors"
+          className=""
         >
           Reset
         </button>
       </div>
-
-      {/* Instructions */}
-      <div className="absolute bottom-4 left-4 text-sm p-3 bg-white rounded-lg shadow-md z-20 border border-gray-200">
-        <div className="font-medium mb-1 text-gray-800">Controls:</div>
-        <div className="text-gray-600">• Drag nodes to move</div>
-        <div className="text-gray-600">• Drag background to pan</div>
-        <div className="text-gray-600">• Mouse wheel to zoom</div>
-      </div>
-
-      {/* Zoom indicator */}
-      <div className="absolute bottom-4 right-4 text-sm p-2 bg-white rounded-lg shadow-md z-20 border border-gray-200">
-        <span className="font-medium text-gray-800">Zoom: {Math.round(scale * 100)}%</span>
+      <div className="absolute bottom-4 right-4 z-20">
+        <span className="">Zoom: {Math.round(scale * 100)}%</span>
       </div>
     </div>
   )

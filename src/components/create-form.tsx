@@ -11,7 +11,7 @@ import {
   FormControl,
   FormField,
   FormItem,
-  FormMessage,
+  FormMessage
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { getGeneratedWords } from "@/app/api/generate/route";
@@ -19,12 +19,6 @@ import { getGeneratedWords } from "@/app/api/generate/route";
 import MindMap from "./mindmap";
 import { WordNode } from "@/types"; 
 
-
-const formSchema = z.object({
-  word: z.string().min(1, {
-    message: "Word must be at least 1 characters.",
-  }),
-});
 
 const sampleData: WordNode = {
   word: "Project Planning",
@@ -56,6 +50,11 @@ const sampleData: WordNode = {
   ],
 }
 
+const formSchema = z.object({
+  word: z.string().min(1, {
+    message: "Word is required",
+  }),
+});
 
 
 export function CreateMindMapForm() {
@@ -82,12 +81,12 @@ export function CreateMindMapForm() {
   return (
     <div>
       <Form {...form}>
-        <form onSubmit={form.handleSubmit(onSubmit)} className="fixed z-2 flex items-center justify-center w-full">
+        <form onSubmit={form.handleSubmit(onSubmit)} className="fixed z-2 flex items-center justify-center w-[25%]">
           <FormField
             control={form.control}
             name="word"
             render={({ field }) => (
-              <FormItem>
+              <FormItem className="w-full">
                 <FormControl>
                   <Input placeholder="enter the word" {...field} />
                 </FormControl>

@@ -101,7 +101,6 @@ export const useMindmapStore = create<MindmapState>((set, get) => ({
 
   setNodes: (nodes) => {
     set({ nodes })
-    // Automatically update lines when nodes change
     setTimeout(() => get().updateLines(), 0)
   },
 
@@ -109,7 +108,6 @@ export const useMindmapStore = create<MindmapState>((set, get) => ({
     set((state) => ({
       nodes: state.nodes.map((node) => (node.id === nodeId ? { ...node, x, y } : node)),
     }))
-    // Update lines immediately for smooth dragging
     get().updateLines()
   },
 
@@ -125,22 +123,18 @@ export const useMindmapStore = create<MindmapState>((set, get) => ({
       const parentNode = nodes.find((n) => n.id === node.parentId)
       if (!parentNode) return
 
-      // Calculate precise connection points
       const dx = node.x - parentNode.x
       const dy = node.y - parentNode.y
       const distance = Math.sqrt(dx * dx + dy * dy)
 
       if (distance === 0) return
 
-      // Calculate unit vector
       const unitX = dx / distance
       const unitY = dy / distance
 
-      // Node dimensions (approximate)
       const parentRadius = parentNode.level === 0 ? 60 : 40
       const childRadius = node.level === 1 ? 50 : 40
 
-      // Connection points at node edges
       newLines.push({
         id: `${node.parentId}-${node.id}`,
         from: {

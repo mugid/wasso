@@ -98,7 +98,7 @@ export function CreateMindMapForm() {
           <Button type="submit">Submit</Button>
         </form>
       </Form>
-      {result && <MindMap data={result} />}
+      {sampleData && <MindMap data={sampleData} />}
     </div>
   );
 }

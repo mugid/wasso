@@ -3,11 +3,12 @@ import {
   text,
   timestamp,
   boolean,
-  uuid
+  uuid,
+  AnyPgColumn
 } from "drizzle-orm/pg-core";
 import { sql } from "drizzle-orm";
 
-export const user = pgTable("user", {
+const user = pgTable("user", {
   id: text("id").primaryKey(),
   name: text("name").notNull(),
   email: text("email").notNull().unique(),
@@ -23,7 +24,7 @@ export const user = pgTable("user", {
     .notNull(),
 });
 
-export const session = pgTable("session", {
+const session = pgTable("session", {
   id: text("id").primaryKey(),
   expiresAt: timestamp("expires_at").notNull(),
   token: text("token").notNull().unique(),
@@ -36,7 +37,7 @@ export const session = pgTable("session", {
     .references(() => user.id, { onDelete: "cascade" }),
 });
 
-export const account = pgTable("account", {
+const account = pgTable("account", {
   id: text("id").primaryKey(),
   accountId: text("account_id").notNull(),
   providerId: text("provider_id").notNull(),
@@ -54,7 +55,7 @@ export const account = pgTable("account", {
   updatedAt: timestamp("updated_at").notNull(),
 });
 
-export const verification = pgTable("verification", {
+const verification = pgTable("verification", {
   id: text("id").primaryKey(),
   identifier: text("identifier").notNull(),
   value: text("value").notNull(),
@@ -67,12 +68,26 @@ export const verification = pgTable("verification", {
   ),
 });
 
-export const mindMap = pgTable("mindmap", {
+
+export const mindmaps = pgTable('mindmaps', {
+  id: uuid('id').primaryKey().default(sql`gen_random_uuid()`),
+  title: text('title').notNull(),
+  userId: text('user_id')
+    .notNull()
+    .references(() => user.id, { onDelete: 'cascade' }),
+  createdAt: timestamp('created_at').defaultNow(),
+});
+
+export const mindmapNodes = pgTable('mindmap_nodes', {
   id: uuid('id').primaryKey().default(sql`gen_random_uuid()`),
   word: text('word').notNull(),
-  parentId: uuid('parent_id').references(() => mindMap.id, { onDelete: 'cascade' }),
-  userId: uuid('user_id').references(() => user.id),
+  parentId: uuid('parent_id').references((): AnyPgColumn => mindmapNodes.id, { onDelete: 'cascade' }),
+  mapId: uuid('map_id')
+    .notNull()
+    .references(() => mindmaps.id, { onDelete: 'cascade' }),
 });
+
+
 
 export const schema = {
   user,

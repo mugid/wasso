@@ -1,6 +1,8 @@
 import { generateObject } from "ai";
 import { createAzure } from "@ai-sdk/azure";
-import { z } from "zod";
+import { mindmaps, mindmapNodes } from "@/lib/db/schema";
+import { flattenMindMapTree } from "@/lib/flattenTree"; 
+import { db } from "@/lib/db";
 
 
 export async function getGeneratedWords(userInput: string) {

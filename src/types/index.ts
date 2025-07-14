@@ -17,3 +17,10 @@ export type Line = {
   to: { x: number; y: number }
   id: string
 }
+
+export type FlatNode = {
+  word: string;
+  parentId: string | null;
+  mapId: string;
+};
+

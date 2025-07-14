@@ -1,8 +1,11 @@
 "use client"
 
 import { useEffect, useRef, useCallback } from "react"
-import { useMindmapStore, layoutTree } from "@/lib/mindmap-store"
+import { useMindmapStore, layoutTree } from "@/lib/hooks/use-mindmap-store"
 import { WordNode } from "@/types"
+import { Button } from "@/components/ui/button"
+import { Plus, Minus, Redo } from "lucide-react"
+
 
 export default function MindMap({ data }: { data: WordNode }) {
   const {
@@ -130,8 +133,8 @@ export default function MindMap({ data }: { data: WordNode }) {
   }, [handleMouseDown, handleMouseMove, handleMouseUp, handleWheel])
 
   return (
-    <div className="w-full h-screen overflow-hidden">
-      <div ref={containerRef} className="absolute inset-0 cursor-grab active:cursor-grabbing">
+    <div className="w-full h-screen">
+      <div ref={containerRef} className="relative w-full h-screen cursor-grab active:cursor-grabbing overflow-hidden">
         <div
           style={{
             transform: `translate(${offset.x}px, ${offset.y}px) scale(${scale})`,
@@ -149,7 +152,7 @@ export default function MindMap({ data }: { data: WordNode }) {
                 y1={line.from.y}
                 x2={line.to.x}
                 y2={line.to.y}
-                stroke="#FFFFFF"
+                stroke="#666"
                 strokeWidth={2}
                 opacity={0.8}
               />
@@ -165,7 +168,6 @@ export default function MindMap({ data }: { data: WordNode }) {
               className={`
                 absolute z-10 rounded-lg
                 text-center cursor-move  
-                
                 ${node.level === 0 ? "text-lg" : "text-sm"}
                 ${isDragging && dragNode === node.id ? "" : ""}
               `}
@@ -176,31 +178,31 @@ export default function MindMap({ data }: { data: WordNode }) {
                 minWidth: node.level === 0 ? "120px" : "80px",
               }}
             >
-              {node.word}
+              <Button>{node.word}</Button>
             </div>
           ))}
         </div>
       </div>
 
-      <div className="absolute top-4 left-4 flex flex-col z-20">
-        <button
+      <div className="absolute bottom-4 left-4 flex gap-2 z-20">
+        <Button
           onClick={() => setScale(Math.min(3, scale * 1.2))}
           className=""
         >
-          Zoom In
-        </button>
-        <button
+          <Plus className="w-4 h-4" />
+        </Button>
+        <Button
           onClick={() => setScale(Math.max(0.3, scale / 1.2))}
           className=""
         >
-          Zoom Out
-        </button>
-        <button
+          <Minus className="w-4 h-4" />
+        </Button>
+        <Button
           onClick={reset}
           className=""
         >
-          Reset
-        </button>
+          <Redo className="w-4 h-4" />
+        </Button>
       </div>
       <div className="absolute bottom-4 right-4 z-20">
         <span className="">Zoom: {Math.round(scale * 100)}%</span>

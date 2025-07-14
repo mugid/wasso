@@ -3,7 +3,9 @@ import {
   text,
   timestamp,
   boolean,
+  uuid
 } from "drizzle-orm/pg-core";
+import { sql } from "drizzle-orm";
 
 export const user = pgTable("user", {
   id: text("id").primaryKey(),
@@ -63,6 +65,13 @@ export const verification = pgTable("verification", {
   updatedAt: timestamp("updated_at").$defaultFn(
     () => /* @__PURE__ */ new Date()
   ),
+});
+
+export const mindMap = pgTable("mindmap", {
+  id: uuid('id').primaryKey().default(sql`gen_random_uuid()`),
+  word: text('word').notNull(),
+  parentId: uuid('parent_id').references(() => mindMap.id, { onDelete: 'cascade' }),
+  userId: uuid('user_id').references(() => user.id),
 });
 
 export const schema = {

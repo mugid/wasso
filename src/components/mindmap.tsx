@@ -1,7 +1,7 @@
 "use client"
 
 import { useEffect, useRef, useCallback } from "react"
-import { useMindmapStore, layoutTree } from "@/lib/mindmap-store"
+import { useMindmapStore, layoutTree } from "@/lib/hooks/use-mindmap-store"
 import { WordNode } from "@/types"
 import { Button } from "@/components/ui/button"
 import { Plus, Minus, Redo } from "lucide-react"

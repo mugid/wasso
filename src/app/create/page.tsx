@@ -68,10 +68,10 @@ export default function CreateMindMap() {
               </FormItem>
             )}
           />
-          <Button type="submit">Submit</Button>
+          <Button type="submit" disabled={loading}>Submit</Button>
         </form>
       </Form>
-      {sampleData && <MindMap data={sampleData} />}
+      {result && <MindMap data={result} />}
     </div>
   );
 }

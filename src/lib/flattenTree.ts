@@ -1,4 +1,5 @@
 import { WordNode, FlatNode } from '../types';
+import { v4 as uuidv4 } from 'uuid';
 
 
 export function flattenMindMapTree(
@@ -6,6 +7,8 @@ export function flattenMindMapTree(
   mapId: string,
   parentId: string | null = null
 ): FlatNode[] {
+
+  const id = uuidv4()
 
 
   const flatNode: FlatNode = {

@@ -14,10 +14,11 @@ import {
   FormMessage
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
-import { getGeneratedWords } from "@/app/api/generate/route";
+import { getGeneratedWords } from "@/lib/utils";
 
 import MindMap from "./mindmap";
 import { WordNode } from "@/types"; 
+import { insertMindMap } from "@/server/queries";
 
 
 const sampleData: WordNode = {
@@ -71,6 +72,7 @@ export function CreateMindMapForm() {
     try {
       const generated = await getGeneratedWords(values.word);
       setResult(generated.object as WordNode);
+      insertMindMap(values.word, generated.object as WordNode);
       // handle result here (e.g., set state, show result, etc.)
       console.log(generated);
     } catch (error) {

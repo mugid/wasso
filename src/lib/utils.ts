@@ -8,7 +8,7 @@ export function cn(...inputs: ClassValue[]) {
 }
 
 
-export async function getGeneratedWords(userInput: string) {
+export async function GenerateWords(userInput: string) {
 
   const azure = createAzure({
     resourceName: "beksl-mcqdprhs-eastus2",

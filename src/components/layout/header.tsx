@@ -28,11 +28,11 @@ export async function Header() {
       </nav>
       <div className="flex items-center space-x-4">
         {session ? (
-          <SignIn />
-        ) : (
           <Button>
             <Link href="/profile">Profile</Link>
           </Button>
+        ) : (
+          <SignIn />
         )}
         <ModeToggle />
       </div>

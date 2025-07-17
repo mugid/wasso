@@ -1,4 +1,5 @@
-import { authClient } from "@/lib/auth-client";
+import { auth } from "@/lib/auth";
+import { headers } from "next/headers";
 
 import { ModeToggle } from "../theme-toggle";
 import { SignIn } from "../auth/sign-in";
@@ -6,7 +7,9 @@ import Link from "next/link";
 import { Button } from "@/components/ui/button";
 
 export async function Header() {
-  const { data: session } = await authClient.getSession();
+  const session = await auth.api.getSession({
+    headers: await headers(),
+  });
 
   return (
     <header className="sticky flex items-center justify-between py-4 px-6">

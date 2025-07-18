@@ -1,7 +1,6 @@
 import { auth } from "@/lib/auth";
 import { headers } from "next/headers";
 
-import { ModeToggle } from "../theme-toggle";
 import { SignIn } from "../auth/sign-in";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
@@ -31,7 +30,6 @@ export async function Header() {
         ) : (
           <SignIn />
         )}
-        <ModeToggle />
       </div>
     </header>
   );

@@ -63,7 +63,7 @@ export function Footer() {
           </p>
         </div>
       </div>
-      <div className="container flex sm:flex-row flex-co items-start sm:items-center justify-between mt-8">
+      <div className="container flex items-center justify-between mt-8">
         <p className="text-foreground/70 italic">
           created by{" "}
           <a

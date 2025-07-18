@@ -12,7 +12,7 @@ export async function Header() {
   });
 
   return (
-    <header className="sticky flex items-center justify-between py-4 px-6">
+    <header className="fixed w-full z-20 backdrop-blur-md flex items-center justify-between py-4 px-6">
       <div>
         <h1>wasso</h1>
       </div>

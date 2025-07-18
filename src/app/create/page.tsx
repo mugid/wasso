@@ -10,6 +10,7 @@ import {
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 
+
 import { useCreate } from "./use-create";
 import MindMap from "../../components/mindmap";
 
@@ -54,7 +55,7 @@ export default function CreateMindMap() {
       <Form {...form}>
         <form
           onSubmit={form.handleSubmit(onSubmit)}
-          className="fixed z-2 flex items-center justify-center w-[25%]"
+          className="absolute bottom-4 left-[50%] translate-x-[-50%] z-2 flex items-center justify-center w-[30%]"
         >
           <FormField
             control={form.control}
@@ -71,7 +72,7 @@ export default function CreateMindMap() {
           <Button type="submit" disabled={loading}>Submit</Button>
         </form>
       </Form>
-      {result && <MindMap data={result} />}
+      {sampleData && <MindMap data={sampleData} />}
     </div>
   );
 }

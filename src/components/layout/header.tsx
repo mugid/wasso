@@ -12,21 +12,15 @@ export async function Header() {
   });
 
   return (
-    <header className="fixed w-full z-20 backdrop-blur-md flex items-center justify-between py-4 px-6">
+    <header className="fixed w-full z-30 backdrop-blur-md flex items-center justify-between py-4 px-10 border-b-2 border-b-accent">
       <div>
-        <h1>wasso</h1>
+        <Link href="/">wasso</Link>
       </div>
       <nav>
         <div className="flex items-center space-x-4">
-          <a href="/create" className="hover:underline">
+          <Link href="/create" className="hover:underline">
             create
-          </a>
-          <a href="/about" className="hover:underline">
-            about
-          </a>
-          <a href="/contact" className="hover:underline">
-            contact
-          </a>
+          </Link>
         </div>
       </nav>
       <div className="flex items-center space-x-4">

@@ -22,6 +22,9 @@ const geistMono = Geist_Mono({
 export const metadata: Metadata = {
   title: "Wasso - a tool for brainstorming and design",
   description: "Wasso is a tool that helps you brainstorm faster and design better.",
+  icons: {
+    icon: "/icon.svg",
+  }
 };
 
 export default function RootLayout({

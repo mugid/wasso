@@ -9,7 +9,7 @@ const features = [
     Icon: FileTextIcon,
     name: "Save your files",
     description: "You can export your mindmaps in different formats",
-    href: "/create",
+    href: "/mindmaps",
     cta: "Learn more",
     className: "lg:col-start-1 lg:col-end-2 lg:row-start-1 lg:row-end-3",
   },
@@ -17,7 +17,7 @@ const features = [
     Icon: Workflow,
     name: "Mindmaps",
     description: "Brainstorm your ideas with mindmaps",
-    href: "/create",
+    href: "/mindmaps",
     cta: "Learn more",
     className: "lg:row-start-1 lg:row-end-4 lg:col-start-2 lg:col-end-3"
   },
@@ -25,7 +25,7 @@ const features = [
     Icon: SquareMousePointer,
     name: "Nodes",
     description: "Customze your nodes with different styles",
-    href: "/create",
+    href: "/mindmaps",
     cta: "Learn more",
     className: "lg:col-start-1 lg:col-end-2 lg:row-start-3 lg:row-end-4",
   },
@@ -63,7 +63,7 @@ export default function Home() {
           that unlock ideas, emotions, and brand directions—instantly.
         </p>
         <Button className="p-6 mt-6 text-lg w-[200px]">
-          <Link href="/create">Get Started</Link>
+          <Link href="/mindmaps">Get Started</Link>
         </Button>
       </section>
       <section className="min-h-screen">

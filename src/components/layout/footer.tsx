@@ -15,7 +15,7 @@ export function Footer() {
           <h3 className="text-lg font-semibold mb-4">Navigation</h3>
           <ul className="list-none space-y-2">
             <li>
-              <Link href="/create" className="hover:font-semibold transition-all">
+              <Link href="/" className="hover:font-semibold transition-all">
                 Home
               </Link>
             </li>

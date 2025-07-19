@@ -17,8 +17,8 @@ export async function Header() {
       </div>
       <nav>
         <div className="flex items-center space-x-4">
-          <Link href="/create" className="hover:underline">
-            create
+          <Link href="/mindmaps" className="hover:underline">
+            mindmaps
           </Link>
         </div>
       </nav>

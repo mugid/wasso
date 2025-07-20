@@ -1,19 +1,13 @@
 import { MindMapForm } from "./_components/mindmapForm";
 import { getMindMaps } from "./actions";
-
-type MindMap = {
-  id: string;
-  title: string;
-  userId: string;
-  createdAt: Date | null;
-};
+import { MindMap } from "@/types";
 
 
 export default async function MindMaps() {
   const mindmaps: MindMap[] = await getMindMaps();
 
   return (
-    <div className="min-h-screen">
+    <div className="px-10 pt-10 min-h-screen">
       <MindMapForm />
       {mindmaps.map((mindmap) => (
         <div key={mindmap.id} className="p-4 border-b">

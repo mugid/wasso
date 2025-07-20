@@ -25,3 +25,11 @@ export type FlatNode = {
   mapId: string;
 };
 
+export type MindMap = {
+  id: string;
+  title: string;
+  userId: string;
+  createdAt: Date | null;
+};
+
+

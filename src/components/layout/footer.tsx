@@ -35,11 +35,6 @@ export function Footer() {
           <h3 className="text-lg font-semibold mb-4">Socials</h3>
           <ul className="list-none space-y-2">
             <li>
-              <a href="https://instagram.com/sbek22" className="hover:font-semibold transition-all">
-                Insta.
-              </a>
-            </li>
-            <li>
               <a href="https://github.com/mugid" className="hover:font-semibold transition-all">
                 GitHub
               </a>

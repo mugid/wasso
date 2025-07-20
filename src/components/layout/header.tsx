@@ -13,7 +13,7 @@ export async function Header() {
   });
 
   return (
-    <header className="fixed w-full z-30 backdrop-blur-md flex items-center justify-between py-4 px-10 border-b-2 border-b-accent">
+    <header className="fixed top-0 w-full z-30 backdrop-blur-md flex items-center justify-between py-4 px-10 border-b-2 border-b-accent">
       <div>
         <Link href="/">
           <Image

@@ -1,3 +1,5 @@
+"use client";
+
 import { useRouter } from "next/navigation";
 
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -7,6 +9,7 @@ import { z } from "zod";
 
 import { WordNode } from "@/types"; 
 import { createMindMap } from "./actions";
+
 
 
 

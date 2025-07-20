@@ -1,78 +1,28 @@
-"use client";
+import { MindMapForm } from "./_components/mindmapForm";
+import { getMindMaps } from "./actions";
 
-import { Button } from "@/components/ui/button";
-import {
-  Form,
-  FormControl,
-  FormField,
-  FormItem,
-  FormMessage,
-} from "@/components/ui/form";
-import { Input } from "@/components/ui/input";
-
-
-import { useCreate } from "./use-create";
-import MindMap from "../../components/mindmap";
-
-import { WordNode } from "@/types";
-
-
-const sampleData: WordNode = {
-  word: "Project Planning",
-  children: [
-    {
-      word: "Research",
-      children: [
-        { word: "Market Analysis", children: [] },
-        { word: "User Interviews", children: [] },
-        { word: "Competitor Study", children: [] },
-      ],
-    },
-    {
-      word: "Design",
-      children: [
-        { word: "Wireframes", children: [] },
-        { word: "Prototypes", children: [] },
-        { word: "User Testing", children: [] },
-      ],
-    },
-    {
-      word: "Development",
-      children: [
-        { word: "Frontend", children: [] },
-        { word: "Backend", children: [] },
-        { word: "Database", children: [] },
-      ],
-    },
-  ],
+type MindMap = {
+  id: string;
+  title: string;
+  userId: string;
+  createdAt: Date | null;
 };
 
-export default function CreateMindMap() {
-  const { loading, onSubmit, result, form } = useCreate();
+
+export default async function MindMaps() {
+  const mindmaps: MindMap[] = await getMindMaps();
 
   return (
-    <div>
-      <Form {...form}>
-        <form
-          onSubmit={form.handleSubmit(onSubmit)}
-          className="absolute bottom-4 left-[50%] translate-x-[-50%] z-2 flex items-center justify-center w-[30%]"
-        >
-          <FormField
-            control={form.control}
-            name="word"
-            render={({ field }) => (
-              <FormItem className="w-full">
-                <FormControl>
-                  <Input placeholder="enter the word" {...field} />
-                </FormControl>
-                <FormMessage />
-              </FormItem>
-            )}
-          />
-          <Button type="submit" disabled={loading}>Submit</Button>
-        </form>
-      </Form>
-      {sampleData && <MindMap data={sampleData} />}
+    <div className="min-h-screen">
+      <MindMapForm />
+      {mindmaps.map((mindmap) => (
+        <div key={mindmap.id} className="p-4 border-b">
+          <h3 className="text-lg font-semibold">{mindmap.title}</h3>
+          <p className="text-sm text-gray-500">
+            Created at: {mindmap.createdAt?.toLocaleDateString()}
+          </p>
+        </div>
+      ))}
     </div>
   );
 }

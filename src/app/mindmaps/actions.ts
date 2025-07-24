@@ -29,6 +29,7 @@ export async function createMindMap(word: string) {
   return mindmapObject.object as WordNode;
 }
 
+
 export async function getMindMaps() {
   const session = await auth.api.getSession({
     headers: await headers(),

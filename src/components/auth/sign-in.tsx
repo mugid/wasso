@@ -11,12 +11,12 @@ export function SignIn() {
     try {
       const data = await authClient.signIn.social({
         provider: "google",
-        callbackURL: "/create", 
+        callbackURL: "/", 
       });
 
       if (data.data) {
         router.refresh();
-        router.push("/create");
+        router.push("/mindmaps");
       }
     } catch (error) {
       console.error("Sign in error:", error);

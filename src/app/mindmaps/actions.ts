@@ -1,6 +1,6 @@
 "use server";
 
-import { insertMindMap, selectMindMaps } from "@/server/queries";
+import { insertMindMap, selectMindMaps, selectMindMap } from "@/server/queries";
 import { GenerateWords } from "@/lib/utils";
 import { WordNode } from "@/types";
 import { headers } from "next/headers";
@@ -42,4 +42,21 @@ export async function getMindMaps() {
   const mindMaps = await selectMindMaps({ userId: session.user.id });
   
   return mindMaps
+}
+
+export async function getMindMap(slug: string) {
+  const session = await auth.api.getSession({
+    headers: await headers(),
+  });
+  
+  if (!session?.user?.id) {
+    throw new Error("User not authenticated");
+  }
+  const mindMaps = await selectMindMap({ userId: session.user.id, title: slug });
+  
+  if (mindMaps.length === 0) {
+    throw new Error("Mindmap not found");
+  }
+  
+  return mindMaps[0];
 }

@@ -3,7 +3,7 @@
 import { mindmaps, mindmapNodes} from "@/lib/db/schema";
 import { flattenMindMapTree } from "@/lib/flattenTree";
 import { db } from "@/lib/db";
-import { eq } from "drizzle-orm";
+import { eq, and } from "drizzle-orm";
 import { v4 as uuidv4 } from "uuid";
 
 import { WordNode } from "@/types";
@@ -31,4 +31,16 @@ export async function selectMindMaps({userId}: {userId: string}) {
   const mindMaps = await db.select().from(mindmaps).where(eq(mindmaps.userId, userId));
 
   return mindMaps;
+}
+
+export async function selectMindMap({userId, title}: {userId: string, title: string}) {
+  if (!userId || !title) {
+    throw new Error("User ID and title are required to fetch a mind map.");
+  }
+
+  const mindMap = await db.select().from(mindmaps).where(
+    and(eq(mindmaps.userId, userId), eq(mindmaps.title, title))
+  );
+
+  return mindMap;
 }

@@ -11,10 +11,12 @@ export default async function MindMaps() {
       <MindMapForm />
       {mindmaps.map((mindmap) => (
         <div key={mindmap.id} className="p-4 border-b">
+          <a href={`/mindmaps/${mindmap.title}`} className="hover:underline">
           <h3 className="text-lg font-semibold">{mindmap.title}</h3>
           <p className="text-sm text-gray-500">
             Created at: {mindmap.createdAt?.toLocaleDateString()}
           </p>
+          </a>
         </div>
       ))}
     </div>

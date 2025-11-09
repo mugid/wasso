@@ -1,7 +1,6 @@
 import { auth } from "@/lib/auth";
 import { headers } from "next/headers";
 
-import { SignIn } from "../auth/sign-in";
 import Link from "next/link";
 import Image from "next/image";
 import { Button } from "@/components/ui/button";
@@ -45,7 +44,9 @@ export async function Header() {
             <Link href="/profile">Profile</Link>
           </Button>
         ) : (
-          <SignIn />
+          <Button asChild>
+            <Link href="/sign-up">Sign Up</Link>
+          </Button>
         )}
       </div>
     </header>

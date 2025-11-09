@@ -32,4 +32,8 @@ export type MindMap = {
   createdAt: Date | null;
 };
 
+export type MindMapWithData = MindMap & {
+  data: WordNode;
+};
+
 

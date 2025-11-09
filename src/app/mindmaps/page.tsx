@@ -2,6 +2,7 @@ import { MindMapForm } from "./_components/mindmapForm";
 import { getMindMaps } from "./actions";
 import { MindMap } from "@/types";
 import { Suspense } from "react";
+import Link from "next/link";
 
 async function MindMapsList() {
   const mindmaps: MindMap[] = await getMindMaps();
@@ -9,13 +10,13 @@ async function MindMapsList() {
   return (
     <>
       {mindmaps.map((mindmap) => (
-        <div key={mindmap.id} className="p-4 border-b">
-          <a href={`/mindmaps/${mindmap.title}`} className="hover:underline">
-          <h3 className="text-lg font-semibold">{mindmap.title}</h3>
-          <p className="text-sm text-gray-500">
-            Created at: {mindmap.createdAt?.toLocaleDateString()}
-          </p>
-          </a>
+        <div key={mindmap.id} className="p-4 border-b hover:bg-accent/50 transition-colors">
+          <Link href={`/mindmaps/${mindmap.id}`} className="block">
+            <h3 className="text-lg font-semibold hover:underline">{mindmap.title}</h3>
+            <p className="text-sm text-muted-foreground">
+              Created at: {mindmap.createdAt?.toLocaleDateString()}
+            </p>
+          </Link>
         </div>
       ))}
     </>

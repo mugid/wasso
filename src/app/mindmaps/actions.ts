@@ -1,10 +1,11 @@
 "use server";
 
-import { insertMindMap, selectMindMaps, selectMindMap } from "@/server/queries";
+import { insertMindMap, selectMindMaps, selectMindMap, selectMindMapById, selectMindMapNodes } from "@/server/queries";
 import { GenerateWords } from "@/lib/utils";
-import { WordNode } from "@/types";
+import { WordNode, MindMap, FlatNode } from "@/types";
 import { headers } from "next/headers";
 import { auth } from "@/lib/auth";
+import { unflattenTree } from "@/lib/unflattenTree";
 
 export async function createMindMap(word: string) {
   const session = await auth.api.getSession({
@@ -44,7 +45,7 @@ export async function getMindMaps() {
   return mindMaps
 }
 
-export async function getMindMap(slug: string) {
+export async function getMindMap(id: string) {
   const session = await auth.api.getSession({
     headers: await headers(),
   });
@@ -52,11 +53,35 @@ export async function getMindMap(slug: string) {
   if (!session?.user?.id) {
     throw new Error("User not authenticated");
   }
-  const mindMaps = await selectMindMap({ userId: session.user.id, title: slug });
+  
+  const mindMaps = await selectMindMapById({ userId: session.user.id, id });
   
   if (mindMaps.length === 0) {
     throw new Error("Mindmap not found");
   }
   
-  return mindMaps[0];
+  const mindMap = mindMaps[0];
+  
+  // Fetch all nodes for this mindmap
+  const flatNodes = await selectMindMapNodes({ mapId: mindMap.id });
+  
+  if (flatNodes.length === 0) {
+    throw new Error("Mindmap has no nodes");
+  }
+  
+  // Reconstruct the tree structure
+  // Convert database nodes to FlatNode format (id, word, parentId, mapId)
+  const nodes: FlatNode[] = flatNodes.map(node => ({
+    id: node.id,
+    word: node.word,
+    parentId: node.parentId,
+    mapId: node.mapId,
+  }));
+  
+  const tree = unflattenTree(nodes);
+  
+  return {
+    ...mindMap,
+    data: tree,
+  };
 }

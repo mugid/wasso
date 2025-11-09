@@ -44,3 +44,25 @@ export async function selectMindMap({userId, title}: {userId: string, title: str
 
   return mindMap;
 }
+
+export async function selectMindMapById({userId, id}: {userId: string, id: string}) {
+  if (!userId || !id) {
+    throw new Error("User ID and mindmap ID are required to fetch a mind map.");
+  }
+
+  const mindMap = await db.select().from(mindmaps).where(
+    and(eq(mindmaps.userId, userId), eq(mindmaps.id, id))
+  );
+
+  return mindMap;
+}
+
+export async function selectMindMapNodes({mapId}: {mapId: string}) {
+  if (!mapId) {
+    throw new Error("Map ID is required to fetch mind map nodes.");
+  }
+
+  const nodes = await db.select().from(mindmapNodes).where(eq(mindmapNodes.mapId, mapId));
+
+  return nodes;
+}

@@ -68,3 +68,15 @@ export async function selectProjects({userId}: {userId: string}) {
 
   return allProjects;
 }
+
+
+export async function insertProject({name, description, userId}: {name: string, description: string, userId: string}) {
+  const projectId = uuidv4();
+
+  await db.insert(projects).values({
+    id: projectId,
+    name,
+    description,
+    userId,
+  });
+}

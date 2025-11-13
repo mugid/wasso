@@ -36,4 +36,10 @@ export type MindMapWithData = MindMap & {
   data: WordNode;
 };
 
-
+export type Project = {
+  id: string;
+  name: string;
+  description: string | null;
+  userId: string;
+  createdAt: Date | null;
+};

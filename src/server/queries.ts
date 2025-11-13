@@ -1,6 +1,6 @@
 "use server";
 
-import { mindmaps, mindmapNodes} from "@/lib/db/schema";
+import { mindmaps, mindmapNodes, projects} from "@/lib/db/schema";
 import { flattenMindMapTree } from "@/lib/flattenTree";
 import { db } from "@/lib/db";
 import { eq, and } from "drizzle-orm";
@@ -56,4 +56,15 @@ export async function selectMindMapNodes({mapId}: {mapId: string}) {
   const nodes = await db.select().from(mindmapNodes).where(eq(mindmapNodes.mapId, mapId));
 
   return nodes;
+}
+
+
+export async function selectProjects({userId}: {userId: string}) {
+  if (!userId) {
+    throw new Error("User ID is required to fetch projects.");
+  }
+
+  const allProjects = await db.select().from(projects).where(eq(projects.userId, userId));
+
+  return allProjects;
 }

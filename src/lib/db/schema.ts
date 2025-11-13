@@ -68,6 +68,17 @@ export const verification = pgTable("verification", {
   ),
 });
 
+export const projects = pgTable('projects', {
+  id: uuid('id').primaryKey().default(sql`gen_random_uuid()`),
+  name: text('name').notNull(),
+  description: text('description'),
+  userId: text('user_id')
+    .notNull()
+    .references(() => user.id, { onDelete: 'cascade' }),
+  createdAt: timestamp('created_at').defaultNow(),
+  updatedAt: timestamp('updated_at').defaultNow(),
+});
+
 export const mindmaps = pgTable('mindmaps', {
   id: uuid('id').primaryKey().default(sql`gen_random_uuid()`),
   title: text('title').notNull(),

@@ -23,6 +23,7 @@ export async function insertMindMap({userInput, object, userId}: {userInput: str
   await db.insert(mindmapNodes).values(flatNodes);
 }
 
+
 export async function selectMindMaps({userId}: {userId: string}) {
   if (!userId) {
     throw new Error("User ID is required to fetch mind maps.");
@@ -33,17 +34,6 @@ export async function selectMindMaps({userId}: {userId: string}) {
   return mindMaps;
 }
 
-export async function selectMindMap({userId, title}: {userId: string, title: string}) {
-  if (!userId || !title) {
-    throw new Error("User ID and title are required to fetch a mind map.");
-  }
-
-  const mindMap = await db.select().from(mindmaps).where(
-    and(eq(mindmaps.userId, userId), eq(mindmaps.title, title))
-  );
-
-  return mindMap;
-}
 
 export async function selectMindMapById({userId, id}: {userId: string, id: string}) {
   if (!userId || !id) {
@@ -56,6 +46,7 @@ export async function selectMindMapById({userId, id}: {userId: string, id: strin
 
   return mindMap;
 }
+
 
 export async function selectMindMapNodes({mapId}: {mapId: string}) {
   if (!mapId) {

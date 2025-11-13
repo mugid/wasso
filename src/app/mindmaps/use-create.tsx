@@ -11,8 +11,6 @@ import { WordNode } from "@/types";
 import { createMindMap } from "./actions";
 
 
-
-
 const formSchema = z.object({
   word: z.string().min(1, {
     message: "Word is required",

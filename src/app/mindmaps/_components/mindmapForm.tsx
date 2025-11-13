@@ -14,7 +14,7 @@ import { useCreate } from "../use-create";
 
 
 export function MindMapForm() {
-  const { loading, onSubmit, result, form } = useCreate();
+  const { loading, onSubmit, form } = useCreate();
 
   return (
     <div>

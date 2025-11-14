@@ -12,23 +12,10 @@ export async function Header() {
   });
 
   return (
-    <header className="fixed top-0 w-full z-30 backdrop-blur-md flex items-center justify-between py-4 px-10 border-b-2 border-b-accent">
+    <header className="fixed w-7xl top-10 left-[50%] translate-x-[-50%] z-30 backdrop-blur-md flex items-center justify-between py-4 px-10 border-2 border-accent rounded-full">
       <div>
         <Link href="/">
-          <Image
-            src={"/logo-light.svg"}
-            alt="logo"
-            className="dark:hidden"
-            width={100}
-            height={100}
-          />
-          <Image
-            src={"/logo-dark.svg"}
-            alt="logo"
-            className="hidden dark:block"
-            width={100}
-            height={100}
-          />
+          <Image src={"/logo.svg"} alt="logo" width={20} height={20} />
         </Link>
       </div>
       <nav>
@@ -36,15 +23,18 @@ export async function Header() {
           <Link href="/mindmaps" className="hover:underline">
             mindmaps
           </Link>
+          <Link href="/projects" className="hover:underline">
+            projects
+          </Link>
         </div>
       </nav>
       <div className="flex items-center space-x-4">
         {session ? (
-          <Button>
+          <Button className="rounded-full">
             <Link href="/profile">Profile</Link>
           </Button>
         ) : (
-          <Button asChild>
+          <Button className="rounded-full" asChild>
             <Link href="/sign-up">Sign Up</Link>
           </Button>
         )}

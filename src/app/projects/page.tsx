@@ -15,7 +15,7 @@ import {
   DialogTrigger,
 } from "@/components/ui/dialog";
 
-import {ProjectForm} from "./_components/projectsForm";
+import { ProjectForm } from "./_components/projectsForm";
 
 async function ProjectsList() {
   const projects: Project[] = await getProjects();
@@ -42,29 +42,31 @@ async function ProjectsList() {
 }
 
 export default async function Projects() {
-
   return (
-    <div className="px-10 pt-10 min-h-screen">
-      <Dialog>
-        <DialogTrigger asChild>
-          <Button>New Project</Button>
-        </DialogTrigger>
-        <DialogContent className="sm:max-w-md">
-          <DialogHeader>
-            <DialogTitle>Create New Project</DialogTitle>
-            <DialogDescription>
-              Enter the details of the project you are starting.
-            </DialogDescription>
-          </DialogHeader>
+    <div className="mt-20 max-w-4xl mx-auto min-h-screen">
+      <div className="flex items-center justify-between">
+        <h1 className="font-bold text-xl">Your projects</h1>
+        <Dialog>
+          <DialogTrigger asChild>
+            <Button>New Project</Button>
+          </DialogTrigger>
+          <DialogContent className="sm:max-w-md">
+            <DialogHeader>
+              <DialogTitle>Create New Project</DialogTitle>
+              <DialogDescription>
+                Enter the details of the project you are starting.
+              </DialogDescription>
+            </DialogHeader>
 
-          <div className="w-full max-w-md">
-            <ProjectForm />
-          </div>
+            <div className="w-full max-w-md">
+              <ProjectForm />
+            </div>
 
-          <DialogFooter className="sm:justify-start">
-          </DialogFooter>
-        </DialogContent>
-      </Dialog>
+            <DialogFooter className="sm:justify-start"></DialogFooter>
+          </DialogContent>
+        </Dialog>
+      </div>
+
       <Suspense fallback={<div>Loading projects...</div>}>
         <ProjectsList />
       </Suspense>

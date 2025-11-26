@@ -4,6 +4,7 @@ import { auth } from "@/lib/auth";
 import { headers } from "next/headers";
 import { selectProjects, insertProject } from "@/server/queries";
 
+
 export async function getProjects() {
     const session = await auth.api.getSession({
         headers: await headers(),

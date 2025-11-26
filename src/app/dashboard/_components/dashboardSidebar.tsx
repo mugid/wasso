@@ -1,4 +1,5 @@
 import Image from "next/image";
+import Link from "next/link";
 import { Suspense } from "react";
 import { Project } from "@/types";
 
@@ -29,15 +30,17 @@ import { Skeleton } from "@/components/ui/skeleton";
 import { ProjectForm } from "./projectsForm";
 import { getProjects } from "../actions";
 
-
-
 export async function DashboardSidebar() {
   const projects: Project[] = await getProjects();
 
   return (
-    <Sidebar variant="floating">
+    <Sidebar collapsible="icon">
       <SidebarHeader>
-        <Image src={"./logo.svg"} alt="logo" width={20} height={20} />
+        <SidebarMenu>
+          <SidebarMenuItem>
+            <Image src={"/logo.svg"} alt="logo" width={14} height={14} />       
+          </SidebarMenuItem>
+        </SidebarMenu>
       </SidebarHeader>
       <SidebarContent>
         <SidebarGroup>
@@ -90,23 +93,21 @@ export async function DashboardSidebar() {
           <SidebarGroupLabel>Projects</SidebarGroupLabel>
           <SidebarGroupContent>
             <SidebarMenu>
-
               <Suspense fallback={<Skeleton />}>
                 {projects.map((project) => (
-
-                
                   <SidebarMenuItem key={project.id}>
-                    <SidebarMenuButton>
-                      <Folder /> {project.name}
-                    </SidebarMenuButton>
+                    <Link href={`/dashboard/${project.id}`}>
+                      <SidebarMenuButton>
+                        <Folder /> {project.name}
+                      </SidebarMenuButton>
+                    </Link>
                   </SidebarMenuItem>
                 ))}
               </Suspense>
-
             </SidebarMenu>
           </SidebarGroupContent>
         </SidebarGroup>
-      </SidebarContent> 
+      </SidebarContent>
     </Sidebar>
   );
 }

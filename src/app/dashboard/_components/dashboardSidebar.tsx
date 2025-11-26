@@ -17,7 +17,6 @@ import {
 } from "@/components/ui/sidebar";
 import {
   Dialog,
-  DialogClose,
   DialogContent,
   DialogDescription,
   DialogFooter,

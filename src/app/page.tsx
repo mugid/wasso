@@ -1,8 +1,17 @@
-"use client";
+
+import Link from "next/link";
+import { Suspense } from "react";
+
+import { Header } from "@/components/layout/header";
 
 import { Button } from "@/components/ui/button";
-import Link from "next/link";
-import { FileTextIcon, Workflow, SquareMousePointer, Eye, Pickaxe } from "lucide-react";
+import {
+  FileTextIcon,
+  Workflow,
+  SquareMousePointer,
+  Eye,
+  Pickaxe,
+} from "lucide-react";
 
 const features = [
   {
@@ -19,7 +28,7 @@ const features = [
     description: "Brainstorm your ideas with mindmaps",
     href: "/mindmaps",
     cta: "Learn more",
-    className: "lg:row-start-1 lg:row-end-4 lg:col-start-2 lg:col-end-3"
+    className: "lg:row-start-1 lg:row-end-4 lg:col-start-2 lg:col-end-3",
   },
   {
     Icon: SquareMousePointer,
@@ -40,8 +49,7 @@ const features = [
   {
     Icon: Pickaxe,
     name: "Projects",
-    description:
-      "Enhance your portfolio with AI-generated briefs",
+    description: "Enhance your portfolio with AI-generated briefs",
     href: "/",
     cta: "Learn more",
     className: "lg:col-start-3 lg:col-end-3 lg:row-start-2 lg:row-end-4",
@@ -51,6 +59,13 @@ const features = [
 export default function Home() {
   return (
     <div>
+      <Suspense
+        fallback={
+          <header className="fixed top-0 w-full z-30 backdrop-blur-md flex items-center justify-between py-4 px-10 border-b-2 border-b-accent" />
+        }
+      >
+        <Header />
+      </Suspense>
       <section className="flex flex-col items-center justify-center min-h-screen mx-4">
         <h1 className="text-5xl font-extrabold tracking-tighter text-center px-10 py-4">
           The Tool for Brainstorming and Design
@@ -91,9 +106,7 @@ export default function Home() {
                   size="sm"
                   className="pointer-events-auto p-0"
                 >
-                  <Link href={feature.href}>
-                    {feature.cta}
-                  </Link>
+                  <Link href={feature.href}>{feature.cta}</Link>
                 </Button>
               </div>
             </div>
